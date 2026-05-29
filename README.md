@@ -89,8 +89,10 @@ cd nexusflow-agent
 
 **2. Create virtual environment**
 ```bash
-python -m venv venv
-venv\Scripts\activate  # Windows
+python -m venv venv --without-pip
+venv\Scripts\Activate.ps1  # Windows
+python -m ensurepip
+python -m pip install --upgrade pip
 ```
 
 **3. Install dependencies**
@@ -99,10 +101,19 @@ pip install -r requirements.txt
 ```
 
 **4. Configure environment variables**
+
+Copy the example file and fill in your keys:
 ```bash
 cp .env.example .env
-# Add your API keys to .env
 ```
+
+You will need:
+| Variable | Where to get it |
+|---|---|
+| `OPENAI_API_KEY` | https://platform.openai.com/api-keys |
+| `LANGSMITH_API_KEY` | https://smith.langchain.com/settings |
+| `GMAIL_ADDRESS` | Your Gmail address |
+| `GMAIL_APP_PASSWORD` | https://myaccount.google.com/apppasswords |
 
 **5. Run the CRM API** (Terminal 1)
 ```bash
@@ -114,9 +125,10 @@ python crm/api.py
 python main.py
 ```
 
-**7. Open the dashboard** (Terminal 2)
+**7. Open the dashboard** (Terminal 3)
 ```bash
 streamlit run dashboard/app.py
+```
 ```
 
 ---
