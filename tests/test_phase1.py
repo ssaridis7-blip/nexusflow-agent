@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # ─────────────────────────────────────────────
-# TOOL TESTS (no API key needed — stubs)
+# TOOL TESTS
 # ─────────────────────────────────────────────
 
 class TestMonitoringTools:
@@ -34,8 +34,8 @@ class TestMonitoringTools:
         from agent.tools import get_overdue_invoices
         result = json.loads(get_overdue_invoices.invoke({}))
         
-        required_fields = ["invoice_id", "customer_id", "customer_name", 
-                          "amount_gbp", "days_overdue", "tier"]
+        required_fields = ["invoice_id", "contact_id", "company",
+                          "amount_gbp", "days_overdue", "status"]
         for invoice in result["overdue_invoices"]:
             for field in required_fields:
                 assert field in invoice, f"Missing field: {field}"
@@ -108,8 +108,8 @@ class TestActionTools:
         data = json.loads(result)
         
         assert data["status"] == "task_scheduled"
-        assert "task_id" in data["task"]
-        assert data["task"]["task_id"].startswith("TASK-")
+        assert "customer_id" in data
+        assert data["customer_id"] == "C003"
     
     def test_flag_for_human_review(self):
         from agent.tools import flag_for_human_review
@@ -133,8 +133,8 @@ class TestActionTools:
         
         assert data["status"] == "report_generated"
         assert "pipeline_health" in data
-        assert "revenue_risk" in data
-        assert "top_priorities" in data
+        assert "revenue" in data
+        assert "overdue_invoices" in data
     
     def test_search_knowledge_base(self):
         from agent.tools import search_knowledge_base
@@ -149,7 +149,7 @@ class TestActionTools:
 
 
 # ─────────────────────────────────────────────
-# GRAPH STRUCTURE TESTS (no API key needed)
+# GRAPH STRUCTURE TESTS
 # ─────────────────────────────────────────────
 
 class TestGraphStructure:

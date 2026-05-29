@@ -57,32 +57,25 @@ Streamlit Dashboard
 ---
 
 ## Project Structure
-nexusflow-agent/
-├── agent/
-│   ├── graph.py        # LangGraph agent definition
-│   ├── nodes.py        # Monitor, decide, report nodes
-│   ├── tools.py        # 8 agent tools
-│   ├── prompts.py      # System prompts and business rules
-│   └── memory.py       # LangGraph checkpointer
-├── crm/
-│   ├── api.py          # FastAPI CRM (7 endpoints)
-│   └── synthetic_data.json
-├── rag/
-│   ├── search.py       # ChromaDB search wrapper
-│   ├── pipeline.py     # Full RAG pipeline
-│   ├── chroma_db/      # Pre-built vector store
-│   └── knowledge_base/ # 4 NexusFlow documents
-├── dashboard/
-│   └── app.py          # Streamlit dashboard
-├── notifications/
-│   └── email.py        # Gmail SMTP notifications
-├── scheduler/
-│   └── runner.py       # APScheduler hourly runner
-├── logs/
-│   └── agent_actions.jsonl
-├── tests/
-│   └── test_phase1.py  # 18 passing tests
-└── main.py             # Manual run entry point
+
+| File | Description |
+|---|---|
+| `agent/graph.py` | LangGraph agent definition and state |
+| `agent/nodes.py` | Monitor, decide, and report nodes |
+| `agent/tools.py` | 8 agent tools |
+| `agent/prompts.py` | System prompts and business rules |
+| `agent/memory.py` | LangGraph checkpointer |
+| `crm/api.py` | FastAPI CRM with 7 endpoints |
+| `crm/synthetic_data.json` | NexusFlow synthetic CRM dataset |
+| `rag/search.py` | ChromaDB search wrapper |
+| `rag/pipeline.py` | Full RAG pipeline |
+| `rag/chroma_db/` | Pre-built vector store (164 vectors) |
+| `rag/knowledge_base/` | 4 NexusFlow knowledge documents |
+| `dashboard/app.py` | Streamlit agent dashboard |
+| `notifications/email.py` | Gmail SMTP notifications |
+| `scheduler/runner.py` | APScheduler hourly runner |
+| `tests/test_phase1.py` | 18 passing tests |
+| `main.py` | Manual run entry point |
 
 ---
 
